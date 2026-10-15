@@ -243,10 +243,21 @@
 
   .barra-secundaria{
     display: flex;
+    align-items: center;
+    flex-wrap: wrap;
     justify-content: flex-end;
     gap: 10px;
     padding: 14px 28px 28px;
   }
+
+  .mensagem-salvar{
+    flex: 1;
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--ok);
+  }
+
+  .mensagem-salvar.erro{ color: #c0792e; }
 
   .btn-leve{
     background: transparent;
@@ -261,6 +272,31 @@
   }
 
   .btn-leve:hover{ border-color: var(--purple); color: var(--purple-dark); }
+
+  .btn-salvar{
+    background: var(--purple);
+    border: 1.5px solid var(--purple);
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .btn-salvar:hover{ background: var(--purple-dark); border-color: var(--purple-dark); }
+
+  .btn-salvar:focus-visible{
+    outline: 3px solid var(--purple-dark);
+    outline-offset: 2px;
+  }
+
+  .btn-salvar:disabled{
+    background: #d9d3f0;
+    border-color: #d9d3f0;
+    cursor: not-allowed;
+  }
 
   .aviso{
     color: #c0792e;

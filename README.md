@@ -54,8 +54,9 @@ Tabela `traducoes`:
 | `pontos`    | os pontos de cada célula, em JSON (é isso que o Arduino vai receber)  |
 | `criado_em` | data e hora em que foi salva                                          |
 
-A tradução é salva automaticamente quando a pessoa para de digitar por 1,5 segundo.
-O mesmo texto não é salvo duas vezes seguidas.
+A tradução só vai para o banco quando a pessoa clica em **Salvar tradução** (o botão fica
+desativado enquanto não houver texto). O site mostra um aviso com o número da tradução salva,
+e o mesmo texto não é salvo duas vezes seguidas.
 
 O arquivo `banco/traducoes.db` não vai para o GitHub (está no `.gitignore`): cada pessoa
 tem o seu, criado automaticamente. Para ver o conteúdo, dá para abrir o arquivo no

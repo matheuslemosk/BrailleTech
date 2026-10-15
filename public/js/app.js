@@ -43,24 +43,31 @@ function mostrarAviso(semCorrespondencia){
 
 // ---------------------------------------------------------------------
 // SALVAR NO BANCO DE DADOS
-// Depois que a pessoa para de digitar por 1,5 segundo, o texto é enviado
-// para o servidor (rota POST /api/traducoes), que faz a tradução e guarda
-// tudo na tabela "traducoes" do banco SQLite.
+// Ao clicar em "Salvar tradução", o texto é enviado para o servidor
+// (rota POST /api/traducoes), que faz a tradução e guarda tudo na
+// tabela "traducoes" do banco SQLite.
 // ---------------------------------------------------------------------
 
-let temporizadorSalvar = null;
 let ultimoTextoSalvo = '';
 
-function agendarSalvamento(texto){
-  clearTimeout(temporizadorSalvar);
-  temporizadorSalvar = setTimeout(function(){
-    salvarTraducao(texto);
-  }, 1500);
+function mostrarMensagemSalvar(mensagem, ehErro){
+  const mensagemEl = document.getElementById('mensagemSalvar');
+  mensagemEl.textContent = mensagem;
+  mensagemEl.classList.toggle('erro', ehErro === true);
 }
 
-async function salvarTraducao(texto){
+async function salvarTraducao(){
+  const texto = document.getElementById('entrada').value;
+  if(!texto.trim()) return;
+
   // não salva duas vezes o mesmo texto seguido
-  if(texto === ultimoTextoSalvo) return;
+  if(texto === ultimoTextoSalvo){
+    mostrarMensagemSalvar('Essa tradução já foi salva.', true);
+    return;
+  }
+
+  const botao = document.getElementById('btnSalvar');
+  botao.disabled = true; // evita clicar duas vezes enquanto envia
 
   try{
     const resposta = await fetch('/api/traducoes', {
@@ -70,13 +77,19 @@ async function salvarTraducao(texto){
     });
 
     if(resposta.ok){
+      const traducao = await resposta.json();
       ultimoTextoSalvo = texto;
+      mostrarMensagemSalvar('Tradução salva no banco de dados (nº ' + traducao.id + ').', false);
+    } else {
+      mostrarMensagemSalvar('Não foi possível salvar. Tente de novo.', true);
     }
   } catch(erro){
     // Se o servidor estiver desligado, o site continua traduzindo normalmente,
-    // só não guarda no banco.
-    console.warn('Não foi possível salvar a tradução no banco:', erro);
+    // só não consegue guardar no banco.
+    mostrarMensagemSalvar('Não foi possível salvar: o servidor está desligado.', true);
   }
+
+  botao.disabled = !document.getElementById('entrada').value.trim();
 }
 
 // ---------------------------------------------------------------------
@@ -90,9 +103,12 @@ function traduzirAoDigitar(){
 
   document.getElementById('contador').textContent = texto.length + '/500';
 
+  // some o aviso de "salva" quando o texto muda
+  mostrarMensagemSalvar('', false);
+
   if(!texto.trim()){
     ultimaTraducao = null;
-    clearTimeout(temporizadorSalvar);
+    document.getElementById('btnSalvar').disabled = true;
     document.getElementById('resultado').classList.add('oculto');
     document.getElementById('saidaVazia').classList.remove('oculto');
     document.getElementById('aviso').classList.add('oculto');
@@ -109,8 +125,7 @@ function traduzirAoDigitar(){
 
   document.getElementById('resultado').classList.remove('oculto');
   document.getElementById('saidaVazia').classList.add('oculto');
-
-  agendarSalvamento(texto);
+  document.getElementById('btnSalvar').disabled = false;
 }
 
 function copiarResultado(){
@@ -130,6 +145,7 @@ function limpar(){
 document.getElementById('entrada').addEventListener('input', traduzirAoDigitar);
 document.getElementById('btnCopiar').addEventListener('click', copiarResultado);
 document.getElementById('btnLimpar').addEventListener('click', limpar);
+document.getElementById('btnSalvar').addEventListener('click', salvarTraducao);
 
 /*
   PRÓXIMO PASSO (etapa 2 da metodologia): comunicação com o Arduino.
