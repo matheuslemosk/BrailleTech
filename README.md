@@ -1,6 +1,6 @@
 # BrailleTech
 
-Tradutor de texto para Braille — Projeto Integrador I (IFSP Campus Campinas). TESTE TESTE TESTE
+Tradutor de texto para Braille — Projeto Integrador I (IFSP Campus Campinas).
 
 O site traduz o texto digitado para Braille (Grafia Braille para a Língua Portuguesa, grau 1)
 e guarda cada tradução em um banco de dados SQLite. Essas traduções guardadas serão usadas
