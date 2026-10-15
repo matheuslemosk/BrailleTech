@@ -1,6 +1,6 @@
 # BrailleTech
 
-Tradutor de texto para Braille — Projeto Integrador I (IFSP Campus Campinas).
+Tradutor de texto para Braille — Projeto Integrador I (IFSP Campus Campinas). TESTE TESTE TESTE
 
 O site traduz o texto digitado para Braille (Grafia Braille para a Língua Portuguesa, grau 1)
 e guarda cada tradução em um banco de dados SQLite. Essas traduções guardadas serão usadas
@@ -72,3 +72,4 @@ tem o seu, criado automaticamente. Para ver o conteúdo, dá para abrir o arquiv
 | GET    | `/api/traducoes/:id`     | devolve uma tradução específica                |
 
 Exemplo: abra http://localhost:3000/api/traducoes/ultima no navegador.
+
