@@ -1,0 +1,5 @@
+node_modules/
+banco/*.db
+banco/*.db-journal
+banco/*.db-wal
+banco/*.db-shm

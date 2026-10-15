@@ -1,0 +1,280 @@
+  :root{
+    --bg: #f6f3ee;
+    --bg-soft: #efe9e0;
+    --card: #ffffff;
+    --card-soft: #f6f4fb;
+    --ink: #2b2a33;
+    --muted: #8b889a;
+    --line: #e7e3f0;
+    --purple: #8b6cf2;
+    --purple-dark: #6f4fe0;
+    --purple-pale: #efe9fd;
+    --ok: #3fb97f;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    background-image: radial-gradient(circle at 10% 0%, rgba(139,108,242,0.07), transparent 40%),
+                       radial-gradient(circle at 95% 10%, rgba(139,108,242,0.06), transparent 35%);
+    color: var(--ink);
+    font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+    line-height: 1.55;
+  }
+
+  /* ---------- Topo ---------- */
+
+  .topo{
+    display: flex;
+    align-items: center;
+    padding: 20px 32px;
+  }
+
+  .marca{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 19px;
+  }
+
+  .marca .selo{
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    background: var(--purple);
+    display: grid;
+    place-items: center;
+  }
+
+  .marca .selo svg{ display: block; }
+
+  .marca span em{
+    font-style: normal;
+    color: var(--purple-dark);
+  }
+
+  /* ---------- Conteúdo ---------- */
+
+  .page{
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 24px 24px 72px;
+  }
+
+  .etiqueta{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--purple-dark);
+    background: var(--purple-pale);
+    border-radius: 999px;
+    padding: 6px 14px;
+    margin-bottom: 22px;
+  }
+
+  h1{
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 50px);
+    line-height: 1.12;
+    margin: 0 0 18px;
+  }
+
+  h1 .roxo{ color: var(--purple-dark); }
+
+  .lead{
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 0 0 40px;
+    font-size: 16px;
+  }
+
+  /* ---------- Cartão duplo ---------- */
+
+  .cartao{
+    background: var(--card);
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 40px -28px rgba(80, 60, 140, 0.35);
+    overflow: hidden;
+  }
+
+  .colunas{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: 720px){
+    .colunas{ grid-template-columns: 1fr; }
+    .coluna-entrada{ border-right: none !important; border-bottom: 1px solid var(--line); }
+  }
+
+  .coluna{
+    padding: 26px 28px;
+  }
+
+  .coluna-entrada{
+    border-right: 1px solid var(--line);
+  }
+
+  .coluna-saida{
+    background: var(--card-soft);
+  }
+
+  .coluna-titulo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .coluna-titulo h2{
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .contador{
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  textarea{
+    width: 100%;
+    min-height: 220px;
+    resize: vertical;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: var(--bg-soft);
+    color: var(--ink);
+    font-size: 16px;
+    font-family: inherit;
+  }
+
+  textarea::placeholder{ color: #b4b0c2; }
+
+  textarea:focus{
+    outline: none;
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(139,108,242,0.18);
+  }
+
+  .nota-auto{
+    font-size: 12.5px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .saida-caixa{
+    min-height: 220px;
+    padding: 16px;
+    border-radius: 12px;
+    border: 1.5px solid var(--line);
+    background: #ffffff;
+  }
+
+  .saida-vazia{
+    color: #b4b0c2;
+    font-size: 16px;
+  }
+
+  .braille-unicode{
+    font-size: clamp(24px, 5vw, 30px);
+    letter-spacing: 3px;
+    word-break: break-word;
+    margin-bottom: 16px;
+  }
+
+  .celulas{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .celula{
+    display: grid;
+    grid-template-columns: repeat(2, 10px);
+    grid-template-rows: repeat(3, 10px);
+    gap: 3px;
+    padding: 5px 5px 16px;
+    position: relative;
+  }
+
+  .celula .letra{
+    position: absolute;
+    bottom: 1px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--muted);
+  }
+
+  .ponto{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #e4e0f2;
+  }
+
+  .ponto.ativo{
+    background: var(--purple-dark);
+  }
+
+  .btn-copiar{
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: #fff;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+  }
+
+  .btn-copiar:hover{ border-color: var(--purple); }
+
+  .barra-secundaria{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 14px 28px 28px;
+  }
+
+  .btn-leve{
+    background: transparent;
+    border: 1.5px solid var(--line);
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+
+  .btn-leve:hover{ border-color: var(--purple); color: var(--purple-dark); }
+
+  .aviso{
+    color: #c0792e;
+    font-size: 13.5px;
+    margin-top: 10px;
+  }
+
+  .oculto{ display: none; }
+
+  footer{
+    margin-top: 48px;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  footer strong{ color: var(--ink); }
